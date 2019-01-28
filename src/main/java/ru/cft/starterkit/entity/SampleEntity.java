@@ -34,7 +34,7 @@ public class Purchase {
     }
 
     public String getName() {
-        return foo;
+        return name;
     }
 
     public void setFoo(String foo) {
