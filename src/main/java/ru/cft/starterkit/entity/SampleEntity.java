@@ -2,24 +2,27 @@ package ru.cft.starterkit.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import java.util.Date;
 import java.util.Objects;
 import java.util.UUID;
 
-public class SampleEntity {
+public class Purchase {
 
     private Long id;
 
-    private String foo;
+    private String name;
 
-    private Double bar;
+    private Date date;
+
+    private Number cost;
 
     @JsonIgnore
     private UUID baz;
 
-    public SampleEntity(String foo, Double bar, UUID baz) {
-        this.foo = foo;
-        this.bar = bar;
-        this.baz = baz;
+    public Purchase(String name, Date date, Number cost) {
+        this.name = name;
+        this.date = date;
+        this.cost = cost;
     }
 
     public Long getId() {
@@ -30,7 +33,7 @@ public class SampleEntity {
         this.id = id;
     }
 
-    public String getFoo() {
+    public String getName() {
         return foo;
     }
 
@@ -79,5 +82,4 @@ public class SampleEntity {
                ", baz=" + baz +
                '}';
     }
-
 }
