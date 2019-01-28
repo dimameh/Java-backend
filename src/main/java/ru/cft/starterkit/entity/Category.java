@@ -57,14 +57,4 @@ public class Category {
         this.consumption = consumption;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Category)) return false;
-        Category entity = (Category) o;
-        return Objects.equals(id, entity.id) &&
-                Objects.equals(name, entity.name) &&
-                Objects.equals(budget, entity.budget) &&
-                Objects.equals(consumption, entity.consumption);
-    }
 }
