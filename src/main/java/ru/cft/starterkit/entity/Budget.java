@@ -1,45 +1,76 @@
 package ru.cft.starterkit.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import java.util.Objects;
-import java.util.UUID;
+import java.util.Arrays;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicLong;
 
 public class Budget {
 
     private List<Category> categoryList;
+    private long budget;
+    private long consumption;
+    private final AtomicLong idCounter;
 
-    private Long budget;
-    private Long consumption;
 
-
-    public Budget(Long budget)
+    public Budget(long budget)
     {
-        setBudget(budget);
-        setConsumption(0L);
+        this.budget = budget;
+        consumption = 0L;
+        idCounter = new AtomicLong();
     }
-
-    public Long getBudget()
+    public long getBudget()
     {
         return budget;
     }
 
-    public Long getConsumption() {
+    public void setBudget(long budget)
+    {
+        if(budget <=0)
+        {
+            throw new IllegalArgumentException("Бюджет меньше или равен 0");
+        }
+        this.budget = budget;
+    }
+
+    public long getConsumption()
+    {
         return consumption;
     }
 
-    public Long setConsumption(Long consumption)
+    public void setConsumption(long consumption)
     {
         if(consumption > budget)
-        {throw new IllegalArgumentException("Расход больше бюджета");}
+        {
+            throw new IllegalArgumentException("Расход больше бюджета");
+        }
         this.consumption = consumption;
     }
 
-    public Long setBudget(Long budget)
-    {
-        if(budget < 0)
-        {throw new IllegalArgumentException("Отрицательное значение бюджета");}
-        this.budget = budget;
+    //Возвращает категорию по id
+    public Category getCategory(long id) {
+        return categoryList.get((int)id);
+    }
 
+    //Добавить категорию
+    public void addCategory(Category category) {
+
+        this.consumption += category.getBudget();
+        if(categoryList==null)
+        {
+            categoryList = Arrays.asList(category);
+            return;
+        }
+        categoryList.add(category);
+    }
+
+    public void addCategory(String name, int budget)
+    {
+        this.consumption += budget;
+        if(categoryList==null)
+        {
+            categoryList = Arrays.asList(new Category(name, budget, idCounter.incrementAndGet()));
+            return;
+        }
+        categoryList.add(new Category(name, budget, idCounter.incrementAndGet()));
     }
 }

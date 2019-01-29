@@ -1,11 +1,14 @@
 package ru.cft.starterkit.entity;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicLong;
 
 public class Category {
 
@@ -15,22 +18,21 @@ public class Category {
 
     private int budget;
 
-    private int consumption;
+    private int consumption = 0;
 
     private List<Purchase> purchaseList;
 
-    public Category(String name, int budget, int consumption) {
-        this.name = name;
-        this.budget = budget;
-        this.consumption = consumption;
+    private final AtomicLong idCounter = new AtomicLong();
+
+    @JsonCreator
+    public Category(@JsonProperty("name") String name, @JsonProperty("budget") int budget, @JsonProperty("id") long id) {
+        setName(name);
+        setBudget(budget);
+        this.id = id;
     }
 
     public long getId() {
         return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -57,4 +59,13 @@ public class Category {
         this.consumption = consumption;
     }
 
+    public void AddPurchase(Purchase purchase){
+        purchaseList.add(purchase);
+        consumption += purchase.getCost();
+    }
+
+    public void AddPurchase(String name, Date date, int cost){
+        purchaseList.add(new Purchase(name, date, cost, idCounter.incrementAndGet()));
+        consumption += cost;
+    }
 }

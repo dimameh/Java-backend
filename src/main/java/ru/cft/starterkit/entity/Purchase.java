@@ -16,10 +16,11 @@ public class Purchase {
 
     private int cost;
 
-    public Purchase(String name, Date date, int cost) {
+    public Purchase(String name, Date date, int cost, long id) {
         setName(name);
         setDate(date);
         this.cost = cost;
+        this.id = id;
     }
 
     public long getId() {
