@@ -1,6 +1,8 @@
 package ru.cft.starterkit.entity;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Date;
 import java.util.Objects;
@@ -16,7 +18,8 @@ public class Purchase {
 
     private int cost;
 
-    public Purchase(String name, Date date, int cost, long id) {
+    @JsonCreator
+    public Purchase(@JsonProperty("name") String name, @JsonProperty("date") Date date, @JsonProperty("cost") int cost, @JsonProperty("id") long id) {
         setName(name);
         setDate(date);
         this.cost = cost;

@@ -8,6 +8,8 @@ import ru.cft.starterkit.entity.Purchase;
 import ru.cft.starterkit.repository.BudgetPlanerRepository;
 import ru.cft.starterkit.service.BudgetPlanerService;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Service
@@ -46,10 +48,10 @@ public class BudgetPlanerServiceImpl implements BudgetPlanerService {
         return budgetPlanerRepository.getCategory(id);
     }
 
-    @Override
-    public void AddCategory(Category category) {
-        budgetPlanerRepository.AddCategory(category);
-    }
+//    @Override
+//    public void AddCategory(Category category) {
+//        budgetPlanerRepository.AddCategory(category);
+//    }
 
     @Override
     public void AddCategory(String name, int budget) {
@@ -62,7 +64,15 @@ public class BudgetPlanerServiceImpl implements BudgetPlanerService {
     }
 
     @Override
-    public void AddPurchase(long categoryId, String name, Date date, int cost) {
-        budgetPlanerRepository.AddPurchase(categoryId, name, date, cost);
+    public void AddPurchase(long categoryId, String name, String date, int cost) {
+        SimpleDateFormat format = new SimpleDateFormat();
+        format.applyPattern("dd.MM.yyyy");
+        Date docDate = null;
+        try {
+            docDate = format.parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        budgetPlanerRepository.AddPurchase(categoryId, name, docDate, cost);
     }
 }

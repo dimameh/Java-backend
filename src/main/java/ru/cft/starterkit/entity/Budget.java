@@ -1,11 +1,14 @@
 package ru.cft.starterkit.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class Budget {
 
+    @JsonProperty
     private List<Category> categoryList;
     private long budget;
     private long consumption;
@@ -48,7 +51,7 @@ public class Budget {
 
     //Возвращает категорию по id
     public Category getCategory(long id) {
-        return categoryList.get((int)id);
+        return categoryList.get((int)id - 1);
     }
 
     //Добавить категорию
@@ -63,14 +66,16 @@ public class Budget {
         categoryList.add(category);
     }
 
-    public void addCategory(String name, int budget)
+    //Возвращает id созданной категории
+    public long addCategory(String name, int budget)
     {
         this.consumption += budget;
         if(categoryList==null)
         {
             categoryList = Arrays.asList(new Category(name, budget, idCounter.incrementAndGet()));
-            return;
+            return idCounter.get();
         }
         categoryList.add(new Category(name, budget, idCounter.incrementAndGet()));
+        return idCounter.get();
     }
 }

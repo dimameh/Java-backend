@@ -24,6 +24,7 @@ public class BudgetPlanerRepositoryImpl implements BudgetPlanerRepository {
         {
             throw new NullPointerException("Бюджет не инициализирован");
         }
+        log.info("Budget info has been send");
         return budget;
     }
 
@@ -34,12 +35,14 @@ public class BudgetPlanerRepositoryImpl implements BudgetPlanerRepository {
         {
             throw new IllegalArgumentException("Бюджет меньше или равен 0");
         }
+        log.info("Budget was set on: {}", budget);
         this.budget = new Budget(budget);
     }
 
     @Override
     public long getConsumption()
     {
+
         return budget.getConsumption();
     }
 
@@ -51,6 +54,7 @@ public class BudgetPlanerRepositoryImpl implements BudgetPlanerRepository {
             throw new IllegalArgumentException("Расход больше бюджета");
         }
         budget.setConsumption(consumption);
+        log.info("Consumption was set on: {}", consumption);
     }
 
     @Override
@@ -60,31 +64,30 @@ public class BudgetPlanerRepositoryImpl implements BudgetPlanerRepository {
         return budget.getCategory(id);
     }
 
-    @Override
+//    @Override
     //Добавить категорию
-    public void AddCategory(Category category) {
-        log.info("Added new category: {}", category.getName());
-        budget.addCategory(category);
-        budget.setConsumption(budget.getConsumption() + category.getBudget());
-    }
+//    public void AddCategory(Category category) {
+//        log.info("Added new category: {}", category.getName());
+//        budget.addCategory(category);
+//        budget.setConsumption(budget.getConsumption() + category.getBudget());
+//    }
 
     @Override
     public void AddCategory(String name, int budget)
     {
-        log.info("Added new category: {}", name);
-        this.budget.addCategory(name, budget);
         this.budget.setConsumption( this.budget.getConsumption() + budget);
+        log.info("Added new category: {}, id: {}", name , this.budget.addCategory(name, budget));
 }
 
     @Override
     public void AddPurchase(long categoryId, Purchase purchase) {
-        log.info("Added new purchase: {1} at the category №: {2}", purchase, categoryId);
         budget.getCategory(categoryId).AddPurchase(purchase);
+        log.info("Added new purchase: {} at the category №: {}", purchase.getName(), categoryId);
     }
 
     @Override
     public void AddPurchase(long categoryId, String name, Date date, int cost) {
-        log.info("Added new purchase: {1} at the category №: {2}", name, categoryId);
         budget.getCategory(categoryId).AddPurchase(name, date, cost);
+        log.info("Added new purchase: {1} at the category №: {2}", name, categoryId);
     }
 }
