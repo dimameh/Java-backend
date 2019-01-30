@@ -88,6 +88,6 @@ public class BudgetPlanerRepositoryImpl implements BudgetPlanerRepository {
     @Override
     public void AddPurchase(long categoryId, String name, Date date, int cost) {
         budget.getCategory(categoryId).AddPurchase(name, date, cost);
-        log.info("Added new purchase: {1} at the category №: {2}", name, categoryId);
+        log.info("Added new purchase: {} at the category №: {}", name, categoryId);
     }
 }

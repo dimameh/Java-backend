@@ -55,7 +55,7 @@ public class BudgetPlanerController {
     )
     {
         budgetPlanerService.AddPurchase(categoryId, name, date, cost);
-    }//!!! сразу null???
+    }
 
     @RequestMapping(
             method = RequestMethod.GET,

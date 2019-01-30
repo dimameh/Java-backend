@@ -4,10 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class Category {
@@ -20,7 +17,7 @@ public class Category {
 
     private int consumption = 0;
 
-    private List<Purchase> purchaseList;
+    private List<Purchase> purchaseList = new ArrayList();
 
     private final AtomicLong idCounter = new AtomicLong();
 
