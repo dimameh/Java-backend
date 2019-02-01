@@ -69,8 +69,8 @@ public class Category {
         consumption += cost;
     }
 
-    public void RemovePurchase(Purchase purchase)
+    public void RemovePurchase(long id)
     {
-        purchaseList.remove(purchase);
+        purchaseList.remove(id);
     }
 }

@@ -98,7 +98,7 @@ public class BudgetPlanerRepositoryImpl implements BudgetPlanerRepository {
     }
 
     @Override
-    public void RemovePurchase(long categoryId, Purchase purchase) {
-        budget.getCategory(categoryId).RemovePurchase(purchase);
+    public void RemovePurchase(long categoryId, long id) {
+        budget.getCategory(categoryId).RemovePurchase(id);
     }
 }
