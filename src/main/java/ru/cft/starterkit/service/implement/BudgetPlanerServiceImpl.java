@@ -77,9 +77,9 @@ public class BudgetPlanerServiceImpl implements BudgetPlanerService {
     }
 
     @Override
-    public void RemoveCategory(Category category)
+    public void RemoveCategory(long id)
     {
-        budgetPlanerRepository.RemoveCategory(category);
+        budgetPlanerRepository.RemoveCategory(id);
     }
 
     @Override

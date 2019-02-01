@@ -79,7 +79,7 @@ public class Budget {
         return idCounter.get();
     }
 
-    public void removeCategory(Category category){
-        categoryList.remove(category);
+    public void removeCategory(long id){
+        categoryList.remove(id);
     }
 }

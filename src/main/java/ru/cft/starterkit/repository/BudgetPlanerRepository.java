@@ -18,5 +18,5 @@ public interface BudgetPlanerRepository {
     void AddPurchase(long categoryId, Purchase purchase);
     void AddPurchase(long categoryId, String name, Date date, int cost);
     void RemovePurchase(long categoryId, Purchase purchase);
-    void RemoveCategory(Category category);
+    void RemoveCategory(long id);
 }

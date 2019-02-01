@@ -19,7 +19,7 @@ public interface BudgetPlanerService {
     void AddPurchase(long categoryId, Purchase purchase);
     void AddPurchase(long categoryId, String name, String date, int cost);
     void RemovePurchase(long categoryId, Purchase purchase);
-    void RemoveCategory(Category category);
+    void RemoveCategory(long id);
 
 
 }

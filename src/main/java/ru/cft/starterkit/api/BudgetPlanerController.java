@@ -81,12 +81,20 @@ public class BudgetPlanerController {
 
     @RequestMapping(
             method = RequestMethod.DELETE,
-            path = "/categories",
+            path = "/categories/{id}",
+            produces = "application/json"
+    )
+    public void removeCategory(@PathVariable(name = "id") long id) {
+       budgetPlanerService.RemoveCategory(id);
+    }
+
+    @RequestMapping(
+            method = RequestMethod.DELETE,
+            path = "/categories/{categoryId}/purchases",
             consumes = "application/json"
     )
-    public void deleteCategory(@RequestParam(name = "object") Category object)
-    {
-
+    public void removePurchase(
+    ){
     }
 
 }

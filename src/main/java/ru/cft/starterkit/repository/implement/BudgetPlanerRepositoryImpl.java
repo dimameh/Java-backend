@@ -92,9 +92,9 @@ public class BudgetPlanerRepositoryImpl implements BudgetPlanerRepository {
     }
 
     @Override
-    public void RemoveCategory(Category category)
+    public void RemoveCategory(long id)
     {
-        budget.removeCategory(category);
+        budget.removeCategory(id);
     }
 
     @Override
