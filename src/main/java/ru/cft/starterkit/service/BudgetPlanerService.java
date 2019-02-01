@@ -18,5 +18,8 @@ public interface BudgetPlanerService {
     void AddCategory(String name, int budget);
     void AddPurchase(long categoryId, Purchase purchase);
     void AddPurchase(long categoryId, String name, String date, int cost);
+    void RemovePurchase(long categoryId, Purchase purchase);
+    void RemoveCategory(Category category);
+
 
 }

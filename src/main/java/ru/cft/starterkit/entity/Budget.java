@@ -78,4 +78,8 @@ public class Budget {
         categoryList.add(new Category(name, budget, idCounter.incrementAndGet()));
         return idCounter.get();
     }
+
+    public void removeCategory(Category category){
+        categoryList.remove(category);
+    }
 }

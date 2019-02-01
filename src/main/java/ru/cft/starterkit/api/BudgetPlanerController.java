@@ -78,4 +78,15 @@ public class BudgetPlanerController {
     public Category getCategory(@PathVariable(name = "id") long id) {
         return budgetPlanerService.getCategory(id);
     }
+
+    @RequestMapping(
+            method = RequestMethod.DELETE,
+            path = "/categories",
+            consumes = "application/json"
+    )
+    public void deleteCategory(@RequestParam(name = "object") Category object)
+    {
+
+    }
+
 }

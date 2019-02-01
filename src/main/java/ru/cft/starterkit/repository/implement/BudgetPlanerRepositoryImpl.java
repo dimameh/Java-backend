@@ -90,4 +90,15 @@ public class BudgetPlanerRepositoryImpl implements BudgetPlanerRepository {
         budget.getCategory(categoryId).AddPurchase(name, date, cost);
         log.info("Added new purchase: {} at the category №: {}", name, categoryId);
     }
+
+    @Override
+    public void RemoveCategory(Category category)
+    {
+        budget.removeCategory(category);
+    }
+
+    @Override
+    public void RemovePurchase(long categoryId, Purchase purchase) {
+        budget.getCategory(categoryId).RemovePurchase(purchase);
+    }
 }

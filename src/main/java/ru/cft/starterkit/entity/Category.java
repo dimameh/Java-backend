@@ -25,9 +25,12 @@ public class Category {
     public Category(@JsonProperty("name") String name, @JsonProperty("budget") int budget, @JsonProperty("id") long id) {
         setName(name);
         setBudget(budget);
-        this.id = id;
+        setID(id);
     }
 
+    private long setID(long id) {
+        this.id = id;
+    }
     public long getId() {
         return id;
     }
@@ -64,5 +67,10 @@ public class Category {
     public void AddPurchase(String name, Date date, int cost){
         purchaseList.add(new Purchase(name, date, cost, idCounter.incrementAndGet()));
         consumption += cost;
+    }
+
+    public void RemovePurchase(Purchase purchase)
+    {
+        purchaseList.remove(purchase);
     }
 }
