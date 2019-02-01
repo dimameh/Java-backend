@@ -64,13 +64,15 @@ public class BudgetPlanerRepositoryImpl implements BudgetPlanerRepository {
         return budget.getCategory(id);
     }
 
-//    @Override
-    //Добавить категорию
-//    public void AddCategory(Category category) {
-//        log.info("Added new category: {}", category.getName());
-//        budget.addCategory(category);
-//        budget.setConsumption(budget.getConsumption() + category.getBudget());
-//    }
+    /**
+     * Добавить категорию
+     * @param category vgftfty
+     */
+    @Override
+    public void AddCategory(Category category) {
+        budget.addCategory(category);
+        log.info("Added new category: {}", category.getName());
+    }
 
     @Override
     public void AddCategory(String name, int budget)

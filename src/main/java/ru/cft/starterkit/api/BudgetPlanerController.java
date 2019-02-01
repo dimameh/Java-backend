@@ -25,19 +25,19 @@ public class BudgetPlanerController {
     @RequestMapping(
             method = RequestMethod.POST,
             path = "/categories",
-            consumes = "application/x-www-form-urlencoded"
+            consumes = "application/json"
     )
-    public void addCategory(@RequestParam(name = "name") String name, @RequestParam(name = "budget") int budget)
+    public void addCategory(@RequestBody Category category)
     {
-        budgetPlanerService.AddCategory(name, budget);
+        budgetPlanerService.AddCategory(category);
     }
 
     @RequestMapping(
             method = RequestMethod.POST,
             path = "/budgets",
-            consumes = "application/x-www-form-urlencoded"
+            consumes = "application/json"
     )
-    public void setBudget(@RequestParam(name = "budget") long budget)
+    public void setBudget(@RequestBody long budget)
     {
         budgetPlanerService.setBudget(budget);
     }
@@ -48,13 +48,11 @@ public class BudgetPlanerController {
             consumes = "application/json"
     )
     public void addPurchase(
-            @RequestParam(name = "name") String name,
-            @RequestParam(name = "date") String date,
-            @RequestParam(name = "cost") int cost,
+            @RequestBody Purchase purchase,
             @PathVariable(name = "categoryId") long categoryId
     )
     {
-        budgetPlanerService.AddPurchase(categoryId, name, date, cost);
+        budgetPlanerService.AddPurchase(categoryId, purchase);
     }
 
     @RequestMapping(
@@ -75,6 +73,7 @@ public class BudgetPlanerController {
             path = "/categories/{id}",
             produces = "application/json"
     )
+
     public Category getCategory(@PathVariable(name = "id") long id) {
         return budgetPlanerService.getCategory(id);
     }

@@ -19,11 +19,10 @@ public class Purchase {
     private int cost;
 
     @JsonCreator
-    public Purchase(@JsonProperty("name") String name, @JsonProperty("date") Date date, @JsonProperty("cost") int cost, @JsonProperty("id") long id) {
+    public Purchase(@JsonProperty("name") String name, @JsonProperty("date") Date date, @JsonProperty("cost") int cost) {
         setName(name);
         setDate(date);
         this.cost = cost;
-        this.id = id;
     }
 
     public long getId() {

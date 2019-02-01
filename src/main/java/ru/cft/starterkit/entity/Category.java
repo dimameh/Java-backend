@@ -22,14 +22,17 @@ public class Category {
     private final AtomicLong idCounter = new AtomicLong();
 
     @JsonCreator
-    public Category(@JsonProperty("name") String name, @JsonProperty("budget") int budget, @JsonProperty("id") long id) {
+    public Category(@JsonProperty("name") String name, @JsonProperty("budget") int budget) {
         setName(name);
         setBudget(budget);
-        this.id = id;
     }
 
     public long getId() {
         return id;
+    }
+
+    public void setId(int id){
+        this.id = id;
     }
 
     public String getName() {
@@ -57,12 +60,19 @@ public class Category {
     }
 
     public void AddPurchase(Purchase purchase){
+        purchase.setId(idCounter.incrementAndGet());
         purchaseList.add(purchase);
         consumption += purchase.getCost();
     }
 
     public void AddPurchase(String name, Date date, int cost){
-        purchaseList.add(new Purchase(name, date, cost, idCounter.incrementAndGet()));
+        Purchase purchase = new Purchase(name, date, cost);
+        purchase.setId(idCounter.incrementAndGet());
+        purchaseList.add(purchase);
         consumption += cost;
+    }
+
+    public List<Purchase> getPurchaseList(){
+        return purchaseList;
     }
 }

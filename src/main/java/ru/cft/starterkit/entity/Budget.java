@@ -2,6 +2,7 @@ package ru.cft.starterkit.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
@@ -9,7 +10,8 @@ import java.util.concurrent.atomic.AtomicLong;
 public class Budget {
 
     @JsonProperty
-    private List<Category> categoryList;
+    private List<String> categoryListString = new ArrayList<>();
+    private List<Category> categoryList = new ArrayList<>();
     private long budget;
     private long consumption;
     private final AtomicLong idCounter;
@@ -51,7 +53,7 @@ public class Budget {
 
     //Возвращает категорию по id
     public Category getCategory(long id) {
-        return categoryList.get((int)id - 1);
+        return categoryList.get((int)id-1);
     }
 
     //Добавить категорию
@@ -63,6 +65,9 @@ public class Budget {
             categoryList = Arrays.asList(category);
             return;
         }
+        category.setId((int)idCounter.incrementAndGet());
+
+        categoryListString.add(category.getName());
         categoryList.add(category);
     }
 
@@ -72,10 +77,16 @@ public class Budget {
         this.consumption += budget;
         if(categoryList==null)
         {
-            categoryList = Arrays.asList(new Category(name, budget, idCounter.incrementAndGet()));
+            Category category = new Category(name, budget);
+            category.setId((int)idCounter.incrementAndGet());
+            categoryList = Arrays.asList(category);
             return idCounter.get();
         }
-        categoryList.add(new Category(name, budget, idCounter.incrementAndGet()));
+        Category category = new Category(name, budget);
+        category.setId((int)idCounter.incrementAndGet());
+
+        categoryListString.add(category.getName());
+        categoryList.add(category);
         return idCounter.get();
     }
 }

@@ -48,10 +48,10 @@ public class BudgetPlanerServiceImpl implements BudgetPlanerService {
         return budgetPlanerRepository.getCategory(id);
     }
 
-//    @Override
-//    public void AddCategory(Category category) {
-//        budgetPlanerRepository.AddCategory(category);
-//    }
+    @Override
+    public void AddCategory(Category category) {
+        budgetPlanerRepository.AddCategory(category);
+    }
 
     @Override
     public void AddCategory(String name, int budget) {
