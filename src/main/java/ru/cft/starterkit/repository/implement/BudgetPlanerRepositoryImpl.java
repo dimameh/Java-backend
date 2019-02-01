@@ -92,4 +92,27 @@ public class BudgetPlanerRepositoryImpl implements BudgetPlanerRepository {
         budget.getCategory(categoryId).AddPurchase(name, date, cost);
         log.info("Added new purchase: {} at the category №: {}", name, categoryId);
     }
+
+    @Override
+    public void RemoveCategory(long id)
+    {
+        if( budget == null){
+            log.info("Try to delete category with budget == null", id);
+            return;
+        }
+        if(budget.getCategorySize() == 0 || budget == null)
+        {
+            log.info("Try to remove Category with id:{} that is not exist", id);
+            return;
+        }
+        String name = budget.getCategory(id).getName();
+        budget.removeCategory(id-1);
+
+        log.info("Category {} id:{} was removed", name, id);
+    }
+
+    @Override
+    public void RemovePurchase(long categoryId, long id) {
+        budget.getCategory(categoryId).RemovePurchase(id);
+    }
 }

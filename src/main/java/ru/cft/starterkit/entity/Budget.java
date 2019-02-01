@@ -17,6 +17,10 @@ public class Budget {
     private final AtomicLong idCounter;
 
 
+    public int getCategorySize(){
+        return categoryList.size();
+    }
+
     public Budget(long budget)
     {
         this.budget = budget;
@@ -53,6 +57,9 @@ public class Budget {
 
     //Возвращает категорию по id
     public Category getCategory(long id) {
+        if(categoryList.size() < 1) {
+            return null;
+        }
         return categoryList.get((int)id-1);
     }
 
@@ -88,5 +95,14 @@ public class Budget {
         categoryListString.add(category.getName());
         categoryList.add(category);
         return idCounter.get();
+    }
+
+    public void removeCategory(long id){
+        if(categoryList.size()<=0)
+        {
+            return;
+        }
+        categoryList.remove((int)id);
+        categoryListString.remove((int)id);
     }
 }

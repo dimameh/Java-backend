@@ -75,4 +75,15 @@ public class BudgetPlanerServiceImpl implements BudgetPlanerService {
         }
         budgetPlanerRepository.AddPurchase(categoryId, name, docDate, cost);
     }
+
+    @Override
+    public void RemoveCategory(long id)
+    {
+        budgetPlanerRepository.RemoveCategory(id);
+    }
+
+    @Override
+    public void RemovePurchase(long categoryId, long id) {
+        budgetPlanerRepository.getCategory(categoryId).RemovePurchase(id);
+    }
 }

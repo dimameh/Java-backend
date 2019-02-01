@@ -75,4 +75,10 @@ public class Category {
     public List<Purchase> getPurchaseList(){
         return purchaseList;
     }
+
+    public void RemovePurchase(long id)
+    {
+        purchaseList.remove((int)id-1);
+
+    }
 }
